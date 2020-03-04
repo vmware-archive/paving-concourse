@@ -41,13 +41,6 @@ locals {
     tcp_target_pool_name      = google_compute_target_pool.tcp-lb.name
     web_target_pool_name      = google_compute_target_pool.websocket-lb.name
 
-    sys_dns_domain  = replace(replace(google_dns_record_set.wildcard-sys.name, "/\\.$/", ""), "*.", "")
-    apps_dns_domain = replace(replace(google_dns_record_set.wildcard-apps.name, "/\\.$/", ""), "*.", "")
-    doppler_dns     = replace(google_dns_record_set.doppler-sys.name, "/\\.$/", "")
-    loggregator_dns = replace(google_dns_record_set.loggregator-sys.name, "/\\.$/", "")
-    ssh_dns         = replace(google_dns_record_set.ssh.name, "/\\.$/", "")
-    tcp_dns         = replace(google_dns_record_set.tcp.name, "/\\.$/", "")
-
     pks_subnet_name                    = google_compute_subnetwork.pks.name
     pks_subnet_cidr                    = google_compute_subnetwork.pks.ip_cidr_range
     pks_subnet_gateway                 = google_compute_subnetwork.pks.gateway_address
@@ -55,7 +48,6 @@ locals {
     pks_master_node_service_account_id = google_service_account.pks-master-node-service-account.email
     pks_worker_node_service_account_id = google_service_account.pks-worker-node-service-account.email
     pks_api_target_pool_name           = google_compute_target_pool.pks-api-lb.name
-    pks_api_dns_domain                 = replace(replace(google_dns_record_set.pks-api.name, "/\\.$/", ""), "*.", "")
 
     services_subnet_name               = google_compute_subnetwork.services.name
     services_subnet_cidr               = google_compute_subnetwork.services.ip_cidr_range
