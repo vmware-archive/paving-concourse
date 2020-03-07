@@ -24,38 +24,6 @@ locals {
     ops_manager_tags                = "${var.environment_name}-ops-manager"
 
     platform_vms_tag = "${var.environment_name}-vms"
-
-    pas_subnet_name               = google_compute_subnetwork.pas.name
-    pas_subnet_cidr               = google_compute_subnetwork.pas.ip_cidr_range
-    pas_subnet_gateway            = google_compute_subnetwork.pas.gateway_address
-    pas_subnet_reserved_ip_ranges = "${cidrhost(google_compute_subnetwork.pas.ip_cidr_range, 1)}-${cidrhost(google_compute_subnetwork.pas.ip_cidr_range, 9)}"
-
-    buildpacks_bucket_name = google_storage_bucket.buildpacks.name
-    droplets_bucket_name   = google_storage_bucket.droplets.name
-    packages_bucket_name   = google_storage_bucket.packages.name
-    resources_bucket_name  = google_storage_bucket.resources.name
-    backup_bucket_name     = google_storage_bucket.backup.name
-
-    http_backend_service_name = google_compute_backend_service.http-lb.name
-    ssh_target_pool_name      = google_compute_target_pool.ssh-lb.name
-    tcp_target_pool_name      = google_compute_target_pool.tcp-lb.name
-    web_target_pool_name      = google_compute_target_pool.websocket-lb.name
-
-    pks_subnet_name                    = google_compute_subnetwork.pks.name
-    pks_subnet_cidr                    = google_compute_subnetwork.pks.ip_cidr_range
-    pks_subnet_gateway                 = google_compute_subnetwork.pks.gateway_address
-    pks_subnet_reserved_ip_ranges      = "${cidrhost(google_compute_subnetwork.pks.ip_cidr_range, 1)}-${cidrhost(google_compute_subnetwork.pks.ip_cidr_range, 9)}"
-    pks_master_node_service_account_id = google_service_account.pks-master-node-service-account.email
-    pks_worker_node_service_account_id = google_service_account.pks-worker-node-service-account.email
-    pks_api_target_pool_name           = google_compute_target_pool.pks-api-lb.name
-
-    services_subnet_name               = google_compute_subnetwork.services.name
-    services_subnet_cidr               = google_compute_subnetwork.services.ip_cidr_range
-    services_subnet_gateway            = google_compute_subnetwork.services.gateway_address
-    services_subnet_reserved_ip_ranges = "${cidrhost(google_compute_subnetwork.services.ip_cidr_range, 1)}-${cidrhost(google_compute_subnetwork.services.ip_cidr_range, 9)}"
-
-    ssl_certificate = var.ssl_certificate
-    ssl_private_key = var.ssl_private_key
   }
 }
 
