@@ -31,3 +31,7 @@ output "stable_config" {
   value     = jsonencode(local.stable_config)
   sensitive = true
 }
+
+output "concourse_url" {
+  value = replace(replace("${google_dns_record_set.concourse.name}", "/\\.$/", ""), "*.", "")
+}

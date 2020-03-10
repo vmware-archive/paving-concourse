@@ -37,17 +37,15 @@ resource "google_compute_firewall" "internal" {
   ]
 }
 
-resource "google_compute_firewall" "http-lb" {
-  name    = "${var.environment_name}-http-lb-firewall"
-  network = google_compute_network.network.self_link
-
-  direction = "INGRESS"
-
+resource "google_compute_firewall" "concourse" {
   allow {
+    ports    = ["443", "2222", "8844", "8443"]
     protocol = "tcp"
-    ports    = ["80", "443"]
   }
 
-  target_tags = ["${var.environment_name}-http-lb"]
+  direction     = "INGRESS"
+  name          = "${var.environment_name}-concourse-open"
+  network       = google_compute_network.network.self_link
+  source_ranges = ["0.0.0.0/0"]
+  target_tags   = ["concourse"]
 }
-

@@ -7,7 +7,7 @@ resource "google_service_account_key" "ops-manager" {
   service_account_id = google_service_account.ops-manager.id
 }
 
-resource "google_project_iam_member" "iam-service-acocunt-user" {
+resource "google_project_iam_member" "iam-service-account-user" {
   project = var.project
   role    = "roles/iam.serviceAccountUser"
   member  = "serviceAccount:${google_service_account.ops-manager.email}"

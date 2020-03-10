@@ -3,19 +3,6 @@ resource "google_compute_address" "concourse" {
   name = "${var.environment_name}-concourse"
 }
 
-resource "google_compute_firewall" "concourse" {
-  allow {
-    ports    = ["443", "2222", "8844", "8443"]
-    protocol = "tcp"
-  }
-
-  direction     = "INGRESS"
-  name          = "${var.environment_name}-concourse-open"
-  network       = google_compute_network.network.self_link
-  source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["concourse"]
-}
-
 resource "google_compute_forwarding_rule" "concourse_credhub" {
   ip_address  = google_compute_address.concourse.address
   ip_protocol = "TCP"
@@ -52,7 +39,4 @@ resource "google_compute_target_pool" "concourse_target_pool" {
   name = "${var.environment_name}-concourse"
 }
 
-output "concourse_url" {
-  value = replace(replace("${google_dns_record_set.concourse.name}", "/\\.$/", ""), "*.", "")
-}
 

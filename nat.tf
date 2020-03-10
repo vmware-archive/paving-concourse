@@ -12,5 +12,3 @@ resource "google_compute_router" "nat-router" {
     asn = 64514
   }
 }
-
-
