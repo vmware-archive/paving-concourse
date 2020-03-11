@@ -1,27 +1,54 @@
-# GCP
+# Pave GCP for Concourse
 
-Follow [these instructions](https://docs.pivotal.io/platform/ops-manager/2-8/gcp/prepare-env-terraform.html)
-to create the service account that is needed to run the terraform templates.
+## Description
 
-### Roles & Permissions
+This repository is derived from https://github.com/pivotal/paving
 
-If you are looking to create a service account with more restrictive permissions,
-you can follow these instructions.
+It's designed to create the infrastructure necessary to deploy Concourse for platform automation.
 
-The roles required:
-- Compute Instance Admin (v1) - `compute.instanceAdmin`
-- Compute Network Admin - `compute.networkAdmin`
-- Compute Security Admin - `compute.securityAdmin`
-- DNS Administrator - `dns.admin`
-- Security Admin - `iam.securityAdmin`
-- Service Account Admin - `iam.serviceAccountAdmin`
-- Service Account Key Admin - `iam.serviceAccountKeyAdmin`
-- Storage Admin - `storage.admin`
+- Only the GCP IaaS is concerned.
+- terraform resources needed for Concourse have been added
+- resources not necessary for Concourse have been removed
 
-For each role, you can run the following command:
+## Assumptions
 
-```console
-gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:$SERVICE_ACCOUNT_EMAIL --role "roles/$ROLE"
-```
+- This repository was cloned to your workspace
+- terraform v0.12 is installed
+- A service account key with permissions necessary to create resources in your gcp project
 
-To understand the mapping between permissions and roles, you can see [this document](https://cloud.google.com/iam/docs/understanding-roles).
+## Steps
+
+1. In GCP create a DNS zone for your subdomain
+
+1. Make a copy of `terraform.tfvars.example` to `terraform.tfvars`
+
+1. In `terraform.tfvars`, fill in these fields
+
+    - an environment name of your choosing
+    - the target GCP project id
+    - the name of the hosted zone created above, and
+    - the contents of a GCP service account key
+
+1. Initialize terraform
+
+    ```bash
+    terraform init
+    ```
+
+1. Run `terraform refresh` to update the state with what currently exists in GCP
+
+    ```bash
+    terraform refresh -var-file terraform.tfvars
+    ```
+
+1. Run `terraform plan` to see what changes will be made in the infrastructure
+
+    ```bash
+    terraform plan -out terraform.tfplan -var-file terraform.tfvars
+    ```
+
+1. Run `terraform apply` to create the resources in the IaaS
+
+    ```bash
+    terraform apply -parallelism=5 terraform.tfplan
+    ```
