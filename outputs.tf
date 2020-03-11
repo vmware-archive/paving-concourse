@@ -24,6 +24,8 @@ locals {
     ops_manager_tags                = "${var.environment_name}-ops-manager"
 
     platform_vms_tag = "${var.environment_name}-vms"
+
+    concourse_url = replace(replace("${google_dns_record_set.concourse.name}", "/\\.$/", ""), "*.", "")
   }
 }
 

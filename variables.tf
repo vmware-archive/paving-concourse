@@ -8,6 +8,7 @@ variable "environment_name" {
 
 variable "region" {
   type = string
+  default = "us-central1"
 }
 
 variable "service_account_key" {
@@ -21,5 +22,5 @@ variable "hosted_zone" {
 variable "availability_zones" {
   description = "Requires exactly THREE availability zones that must belong to the provided region."
   type        = list
+  default     = ["us-central1-a", "us-central1-b", "us-central1-c"]
 }
-

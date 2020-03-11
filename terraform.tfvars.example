@@ -1,0 +1,10 @@
+
+environment_name = "replace_me" # instructor to provide
+project = "replace_me" # the id of your gcp project
+hosted_zone = "replace_me" # the name of your dns managed zone, see `gcloud dns managed-zones list`
+
+service_account_key = <<SERVICE_ACCOUNT_KEY
+# replace this line with the contents of terraform.key.json, your service account key (json)
+SERVICE_ACCOUNT_KEY
+
+
