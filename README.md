@@ -20,9 +20,9 @@ It's designed to create the infrastructure necessary to deploy Concourse for pla
 
 1. In GCP create a DNS zone for your subdomain
 
-1. Make a copy of `terraform.tfvars.example` to `terraform.tfvars`
+1. Make a copy of `terraform.tfvars.example`; name the copy `terraform.tfvars`
 
-1. In `terraform.tfvars`, fill in these fields
+1. Edit `terraform.tfvars` and fill in these fields
 
     - an environment name of your choosing
     - the target GCP project id
