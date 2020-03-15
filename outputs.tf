@@ -37,3 +37,12 @@ output "stable_config" {
 output "concourse_url" {
   value = replace(replace("${google_dns_record_set.concourse.name}", "/\\.$/", ""), "*.", "")
 }
+
+output "blobstore_bucket_name" {
+  value = google_storage_bucket.blobstore.name
+}
+
+output "blobstore-service-account-key" {
+  value = base64decode(google_service_account_key.blobstore.private_key)
+}
+
