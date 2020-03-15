@@ -13,8 +13,8 @@ resource "google_service_account_key" "blobstore" {
   service_account_id = google_service_account.blobstore.id
 }
 
-resource "google_project_iam_member" "compute-blob-storage-admin" {
+resource "google_project_iam_member" "blob-storage-admin" {
   project = var.project
-  role    = "roles/compute.storageAdmin"
+  role    = "roles/storage.admin"
   member  = "serviceAccount:${google_service_account.blobstore.email}"
 }
