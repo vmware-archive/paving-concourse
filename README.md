@@ -26,8 +26,8 @@ It's designed to create the infrastructure necessary to deploy Concourse for pla
 
     - an environment name of your choosing
     - the target GCP project id
-    - the name of the hosted zone created above, and
-    - the contents of a GCP service account key
+    - the name of the hosted zone created above
+    - and a JSON-encoded GCP service account key
 
 1. Initialize terraform
 
